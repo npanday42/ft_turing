@@ -10,11 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-from get_machine import machine, args, sys
-
-input = args.input
-if not set(input).issubset(set(machine['alphabet'])):
-	sys.exit("Error: Invalid character in input")
+from get_machine import machine, input, sys
 
 # print("Alphabet: " + str(machine['alphabet']))
 # print("States\t: " + str(machine['states']))

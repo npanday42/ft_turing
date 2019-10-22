@@ -51,3 +51,6 @@ machine = get_machine()
 error = verify(machine)
 if error:
 	sys.exit("Error: " + error)
+input = args.input
+if not set(input).issubset(set(machine['alphabet'])):
+	sys.exit("Error: Invalid character in input")
