@@ -8,22 +8,17 @@
 	],
 	"blank": ".",
 	"states": [
-		"startleft",
-		"startright",
-		"scanright",
-		"scanleft",
-		"checkright",
-		"checkleft",
-		"FALSE",
+		"scanright1",
+		"scanright2",
 		"write",
 		"HALT"
 	],
-	"initial": "startleft",
+	"initial": "scanright1",
 	"finals": [
 		"HALT"
 	],
 	"transitions": {
-		"startleft": [
+		"scanright1": [
 			{
 				"read": ".",
 				"to_state": "write",
@@ -32,82 +27,12 @@
 			},
 			{
 				"read": "0",
-				"to_state": "scanright",
-				"write": ".",
-				"action": "RIGHT"
-			}
-		],
-		"startright": [
-			{
-				"read": ".",
-				"to_state": "write",
-				"write": "y",
-				"action": "LEFT"
-			},
-			{
-				"read": "0",
-				"to_state": "scanleft",
-				"write": ".",
-				"action": "LEFT"
-			}
-		],
-		"scanright": [
-			{
-				"read": ".",
-				"to_state": "checkright",
-				"write": ".",
-				"action": "LEFT"
-			},
-			{
-				"read": "0",
-				"to_state": "scanright",
+				"to_state": "scanright2",
 				"write": "0",
 				"action": "RIGHT"
 			}
 		],
-		"scanleft": [
-			{
-				"read": ".",
-				"to_state": "checkleft",
-				"write": ".",
-				"action": "RIGHT"
-			},
-			{
-				"read": "0",
-				"to_state": "scanleft",
-				"write": "0",
-				"action": "LEFT"
-			}
-		],
-		"checkright": [
-			{
-				"read": ".",
-				"to_state": "FALSE",
-				"write": ".",
-				"action": "RIGHT"
-			},
-			{
-				"read": "0",
-				"to_state": "startright",
-				"write": ".",
-				"action": "LEFT"
-			}
-		],
-		"checkleft": [
-			{
-				"read": ".",
-				"to_state": "FALSE",
-				"write": ".",
-				"action": "RIGHT"
-			},
-			{
-				"read": "0",
-				"to_state": "startleft",
-				"write": ".",
-				"action": "RIGHT"
-			}
-		],
-		"FALSE": [
+		"scanright2": [
 			{
 				"read": ".",
 				"to_state": "write",
@@ -116,7 +41,7 @@
 			},
 			{
 				"read": "0",
-				"to_state": "FALSE",
+				"to_state": "scanright1",
 				"write": "0",
 				"action": "RIGHT"
 			}
