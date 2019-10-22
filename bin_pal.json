@@ -1,0 +1,260 @@
+{
+	"name": "bin_pal",
+	"alphabet": [
+		"0",
+		"1",
+		".",
+		"y",
+		"n"
+	],
+	"blank": ".",
+	"states": [
+		"startleft",
+		"startright",
+		"scanright1",
+		"scanright0",
+		"scanleft1",
+		"scanleft0",
+		"checkright1",
+		"checkright0",
+		"checkleft1",
+		"checkleft0",
+		"FALSE",
+		"write",
+		"HALT"
+	],
+	"initial": "startleft",
+	"finals": [
+		"HALT"
+	],
+	"transitions": {
+		"startleft": [
+			{
+				"read": ".",
+				"to_state": "write",
+				"write": "y",
+				"action": "RIGHT"
+			},
+			{
+				"read": "1",
+				"to_state": "scanright1",
+				"write": ".",
+				"action": "RIGHT"
+			},
+			{
+				"read": "0",
+				"to_state": "scanright0",
+				"write": ".",
+				"action": "RIGHT"
+			}
+		],
+		"startright": [
+			{
+				"read": ".",
+				"to_state": "write",
+				"write": "y",
+				"action": "LEFT"
+			},
+			{
+				"read": "1",
+				"to_state": "scanleft1",
+				"write": ".",
+				"action": "LEFT"
+			},
+			{
+				"read": "0",
+				"to_state": "scanleft0",
+				"write": ".",
+				"action": "LEFT"
+			}
+		],
+		"scanright0": [
+			{
+				"read": ".",
+				"to_state": "checkright0",
+				"write": ".",
+				"action": "LEFT"
+			},
+			{
+				"read": "0",
+				"to_state": "scanright0",
+				"write": "0",
+				"action": "RIGHT"
+			},
+			{
+				"read": "1",
+				"to_state": "scanright0",
+				"write": "1",
+				"action": "RIGHT"
+			}
+		],
+		"scanright1": [
+			{
+				"read": ".",
+				"to_state": "checkright1",
+				"write": ".",
+				"action": "LEFT"
+			},
+			{
+				"read": "0",
+				"to_state": "scanright1",
+				"write": "0",
+				"action": "RIGHT"
+			},
+			{
+				"read": "1",
+				"to_state": "scanright1",
+				"write": "1",
+				"action": "RIGHT"
+			}
+		],
+		"scanleft0": [
+			{
+				"read": ".",
+				"to_state": "checkleft0",
+				"write": ".",
+				"action": "RIGHT"
+			},
+			{
+				"read": "0",
+				"to_state": "scanleft0",
+				"write": "0",
+				"action": "LEFT"
+			},
+			{
+				"read": "1",
+				"to_state": "scanleft0",
+				"write": "1",
+				"action": "LEFT"
+			}
+		],
+		"scanleft1": [
+			{
+				"read": ".",
+				"to_state": "checkleft1",
+				"write": ".",
+				"action": "RIGHT"
+			},
+			{
+				"read": "0",
+				"to_state": "scanleft1",
+				"write": "0",
+				"action": "LEFT"
+			},
+			{
+				"read": "1",
+				"to_state": "scanleft1",
+				"write": "1",
+				"action": "LEFT"
+			}
+		],
+		"checkright0": [
+			{
+				"read": ".",
+				"to_state": "write",
+				"write": "y",
+				"action": "RIGHT"
+			},
+			{
+				"read": "0",
+				"to_state": "startright",
+				"write": ".",
+				"action": "LEFT"
+			},
+			{
+				"read": "1",
+				"to_state": "FALSE",
+				"write": "1",
+				"action": "RIGHT"
+			}
+		],
+		"checkright1": [
+			{
+				"read": ".",
+				"to_state": "write",
+				"write": "y",
+				"action": "RIGHT"
+			},
+			{
+				"read": "1",
+				"to_state": "startright",
+				"write": ".",
+				"action": "LEFT"
+			},
+			{
+				"read": "0",
+				"to_state": "FALSE",
+				"write": "0",
+				"action": "RIGHT"
+			}
+		],
+		"checkleft0": [
+			{
+				"read": ".",
+				"to_state": "write",
+				"write": "y",
+				"action": "RIGHT"
+			},
+			{
+				"read": "0",
+				"to_state": "startleft",
+				"write": ".",
+				"action": "RIGHT"
+			},
+			{
+				"read": "1",
+				"to_state": "FALSE",
+				"write": "0",
+				"action": "RIGHT"
+			}
+		],
+		"checkleft1": [
+			{
+				"read": ".",
+				"to_state": "write",
+				"write": "y",
+				"action": "RIGHT"
+			},
+			{
+				"read": "1",
+				"to_state": "startleft",
+				"write": ".",
+				"action": "RIGHT"
+			},
+			{
+				"read": "0",
+				"to_state": "FALSE",
+				"write": "0",
+				"action": "RIGHT"
+			}
+		],
+		"FALSE": [
+			{
+				"read": ".",
+				"to_state": "write",
+				"write": "n",
+				"action": "RIGHT"
+			},
+			{
+				"read": "0",
+				"to_state": "FALSE",
+				"write": "0",
+				"action": "RIGHT"
+			},
+			{
+				"read": "1",
+				"to_state": "FALSE",
+				"write": "1",
+				"action": "RIGHT"
+			}
+		],
+		"write": [
+			{
+				"read": ".",
+				"to_state": "HALT",
+				"write": ".",
+				"action": "RIGHT"
+			}
+		]
+	}
+}

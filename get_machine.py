@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         ::::::::             #
+#    get_machine.py                                     :+:    :+:             #
+#                                                      +:+                     #
+#    By: npanday <npanday@student.codam.nl>           +#+                      #
+#                                                    +#+                       #
+#    Created: 2019/10/22 16:06:42 by npanday        #+#    #+#                 #
+#    Updated: 2019/10/22 16:06:42 by npanday       ########   odam.nl          #
+#                                                                              #
+# **************************************************************************** #
+
 import argparse, json, sys
 
 parser = argparse.ArgumentParser()
@@ -7,7 +19,6 @@ args = parser.parse_args()
 
 def verify(machine):
 	valid_fields = {'name', 'alphabet', 'blank', 'states', 'initial', 'finals', 'transitions'}
-	valid_transitions = {'scanright', 'eraseone', 'subone', 'skip'}
 	if machine.keys() != valid_fields:
 		return "Machine has invalid number of fields"
 	for field in machine.keys():
@@ -23,11 +34,12 @@ def verify(machine):
 	for final in machine['finals']:
 		if final not in machine['states']:
 			return "Final-state-set has invalid members"
-	if machine['transitions'].keys() != valid_transitions:
-		return "Machine has invalid number of transitions"
-	for trans in machine['transitions'].keys():
-		if trans not in valid_transitions:
-			return trans + " is not a valid transition"
+	if not set(machine['transitions'].keys()).issubset(machine['states']):
+		return "Machine has invalid transitions"
+	for state in machine['transitions']:
+		for trans in machine['transitions'][state]:
+			if trans.keys() != {"read", "to_state", "write", "action"}:
+				return "Machine has invalid transition descriptions"
 
 def get_machine():
 	jsonfile = open(args.jsonfile)
